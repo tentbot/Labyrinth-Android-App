@@ -19,27 +19,45 @@ class Ball {
 
     update() {
         this.move();
-        this.vel.mult(0.85);
+        this.vel.mult(0.9);
         this.vel.add(this.acc);
         this.acc.mult(0.9);
-        
-        let gravity = new p5.Vector(rotationY, rotationX);
-        gravity = gravity.mult(0.007);
-        this.acc.add(gravity);
+
+        this.gravity();
     }
 
     move() {
-        if (this.pos.x >= width - this.radius || this.pos.x <= this.radius) {
-            this.vel.x *= -0.95;
-            this.acc.x = 0;
+//        let direction = this.detectCollision();
+        if (this.pos.x >= width - this.radius) {
+            let offsetX = this.pos.x + this.radius - width;
+            this.pos.x -= offsetX;
+            this.vel.x *= 0.8;
+        } else if (this.pos.x <= this.radius) {
+            let offsetX = this.pos.x - this.radius;
+            this.pos.x -= offsetX;
+            this.vel.x *= -0.8;
         }
         this.pos.x += this.vel.x;
 
-        if (this.pos.y >= height - this.radius || this.pos.y <= this.radius) {
-            this.vel.y *= -0.95;
-            this.acc.y = 0;
+        if (this.pos.y >= height - this.radius) {
+            let offsetY = this.pos.y + this.radius - height;
+            this.pos.y -= offsetY;
+            this.vel.y *= 0.8;
+        } else if (this.pos.y <= this.radius) {
+            let offsetY = this.pos.y - this.radius;
+            this.pos.y -= offsetY;
+            this.vel.y *= -0.8;
         }
         this.pos.y += this.vel.y;
+    }
+
+    gravity() {
+        let gravity = new p5.Vector(rotationY, rotationX);
+        gravity = gravity.mult(0.005);
+        if (gravity.mag() < 0.01) {
+            gravity.setMag(0);
+        }
+        this.acc.add(gravity);
     }
 
 }
