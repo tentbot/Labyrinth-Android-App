@@ -1,8 +1,8 @@
 class Wall {
-    constructor() {
-        this.pos = new p5.Vector(0, 0);
-        this.len = new p5.Vector(50, 100);
-        this.vel = new p5.Vector(10, 0);
+    constructor(x, y, velX) {
+        this.pos = new p5.Vector(x, y);
+        this.len = new p5.Vector(50, 50);
+        this.vel = new p5.Vector(velX, 0);
     }
 
     render() {
@@ -36,6 +36,16 @@ class Wall {
             this.vel.y *= -1;
         }
         this.pos.y += this.vel.y;
+    }
+
+    checkCollision(other) {
+        if (this.pos.x < other.pos.x && this.pos.x + this.len.x > other.pos.x) {
+            return true;
+        }
+        if (this.pos.y < other.pos.y && this.pos.y + this.len.y > other.pos.y) {
+            return true;
+        }
+        return false;
     }
 }
 

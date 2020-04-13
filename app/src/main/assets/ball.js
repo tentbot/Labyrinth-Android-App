@@ -1,5 +1,4 @@
 class Ball {
-
     constructor() {
         let x = random() * width;
         let y = random() * height;
@@ -59,8 +58,5 @@ class Ball {
         }
         this.acc.add(gravity);
     }
-
-
-
 }
 
