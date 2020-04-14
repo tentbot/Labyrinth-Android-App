@@ -1,13 +1,15 @@
 class Ball {
-    constructor(x, y) {
-        this.pos = new p5.Vector(x, y);
-        this.vel = new p5.Vector(0, 0);
-        this.acc = new p5.Vector(0, 0);
-        this.radius = 20;
-        this.len = new p5.Vector(this.radius, this.radius);
-        this.mass = 1;
+    /* Make a new ball at position (x,y) */
+    constructor(x, y, radius, mass) {
+        this.pos    = new p5.Vector(x, y);
+        this.vel    = new p5.Vector(0, 0);
+        this.acc    = new p5.Vector(0, 0);
+        this.radius = radius || 20;
+        this.len    = new p5.Vector(this.radius, this.radius);
+        this.mass   = mass || 1;
     }
 
+    /* Show the ball on the screen */
     render() {
         push();
         fill(255,0,0);
@@ -16,16 +18,18 @@ class Ball {
         pop();
     }
 
+    /* Update the ball's position, velocity, and acceleration */
     update() {
         this.move();
-        this.vel.mult(0.9);
+
+        this.vel.mult(0.85);
         this.vel.add(this.acc);
         this.acc.mult(0.9 / this.mass);
 
         this.gravity();
     }
 
-    // Update the position of the Ball. If the Ball hits an edge, keep it within the screen.
+    /* Update the position of the Ball. If the Ball hits an edge, keep it within the screen. */
     move() {
         if (this.pos.x >= width - this.radius) {
             let offsetX = this.pos.x + this.radius - width;
@@ -50,12 +54,10 @@ class Ball {
         this.pos.y += this.vel.y;
     }
 
+    /* Accelerate the ball in the direction of tilt */
     gravity() {
         let gravity = new p5.Vector(rotationY, rotationX);
-        gravity = gravity.mult(0.005);
-//        if (gravity.mag() < 0.01) {
-//            gravity.setMag(0);
-//        }
+        gravity = gravity.mult(0.007);
         gravity.setMag(gravity.mag() - 0.01);
         this.acc.add(gravity);
     }

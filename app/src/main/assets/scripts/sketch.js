@@ -2,6 +2,7 @@ let ball;
 let walls = [];
 let RUN_GAME = false;
 let popup;
+let i = 0;
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
@@ -9,6 +10,7 @@ function setup() {
 }
 
 async function draw() {
+//    translate(0, height*3/4 - ball.pos.y);
     background(255);
 
     if (RUN_GAME) {
@@ -26,13 +28,12 @@ async function draw() {
         }
 
         ball.render();
-
         popup.render();
     }
 }
 
 function newGame() {
-    ball = new Ball(width / 2, height *3/4);
+    ball = new Ball(width / 2, height * 3/4);
     generateLevel();
     RUN_GAME = true;
 }
@@ -40,7 +41,7 @@ function newGame() {
 function generateLevel() {
     walls = [];
     for (i = 0; i < 5; i++) {
-        let wall = new Wall(0, 50 * i, i + 1);
+        let wall = new Wall(25, 50 * i, i + 1, 1);
         walls.push(wall);
     }
 }

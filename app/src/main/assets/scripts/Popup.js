@@ -1,13 +1,13 @@
 class Popup {
     constructor(x, y, xDim, yDim, text, textSize, faceColor, edgeColor) {
-        this.size       = 0;
-        this.acc        = 1;
-        this.pos        = new p5.Vector(x, y);
-        this.len        = new p5.Vector(xDim, yDim);
-        this.text       = text || "Alert!";
-        this.textSize   = textSize || 24;
-        this.faceColor  = faceColor || 255;
-        this.edgeColor  = edgeColor || 0;
+        this.size      = 0;
+        this.acc       = 1;
+        this.pos       = new p5.Vector(x, y);
+        this.len       = new p5.Vector(xDim, yDim);
+        this.text      = text || "Alert!";
+        this.textSize  = textSize || 24;
+        this.faceColor = faceColor || 255;
+        this.edgeColor = edgeColor || 0;
     }
 
     render() {
