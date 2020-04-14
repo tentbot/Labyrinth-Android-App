@@ -29,11 +29,8 @@ class Wall {
 
         if (this.pos.y - this.rad.y > height) {
             walls.splice(walls.indexOf(this), 1);
-        } else if (this.pos.y - this.rad.y < 0) {
-            let offsetY = this.pos.y - this.rad.y;
-            this.pos.y -= offsetY;
-            this.vel.y *= -1;
         }
+
         this.pos.y += this.vel.y;
     }
 
