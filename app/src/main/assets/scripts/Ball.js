@@ -1,11 +1,10 @@
 class Ball {
-    constructor() {
-        let x = random() * width;
-        let y = random() * height;
+    constructor(x, y) {
         this.pos = new p5.Vector(x, y);
         this.vel = new p5.Vector(0, 0);
         this.acc = new p5.Vector(0, 0);
         this.radius = 20;
+        this.len = new p5.Vector(this.radius, this.radius);
         this.mass = 1;
     }
 
@@ -26,6 +25,7 @@ class Ball {
         this.gravity();
     }
 
+    // Update the position of the Ball. If the Ball hits an edge, keep it within the screen.
     move() {
         if (this.pos.x >= width - this.radius) {
             let offsetX = this.pos.x + this.radius - width;
@@ -53,9 +53,10 @@ class Ball {
     gravity() {
         let gravity = new p5.Vector(rotationY, rotationX);
         gravity = gravity.mult(0.005);
-        if (gravity.mag() < 0.01) {
-            gravity.setMag(0);
-        }
+//        if (gravity.mag() < 0.01) {
+//            gravity.setMag(0);
+//        }
+        gravity.setMag(gravity.mag() - 0.01);
         this.acc.add(gravity);
     }
 }

@@ -4,8 +4,10 @@ import android.annotation.SuppressLint;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.WindowManager;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 public class LabyrinthActivity extends AppCompatActivity {
 
@@ -22,7 +24,18 @@ public class LabyrinthActivity extends AppCompatActivity {
 
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
-        webView.loadUrl("file:///android_asset/index.html");
+        webView.setWebViewClient(new MyWebViewClient());
+//        webView.setWebChromeClient(new WebChromeClient());
+        webView.loadUrl("file:///android_asset/labyrinth.html");
     }
+
+    private static class MyWebViewClient extends WebViewClient {
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView webView, String url) {
+            return false;
+        }
+    }
+
+
 
 }
