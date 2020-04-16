@@ -2,7 +2,7 @@ let ball;
 let walls = [];
 let popup;
 let RUN_GAME = false;
-let bgColors = ['brown','white','orange','cyan','teal','beige','green','blue','purple','yellow'];
+let bgColors = ['brown','white','orange','cyan','beige','green','blue','purple','teal','yellow'];
 let wave = 0;
 
 function setup() {
