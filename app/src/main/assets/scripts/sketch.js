@@ -15,7 +15,7 @@ async function draw() {
     textAlign(CENTER, CENTER);
     textSize(128);
     stroke(128);
-    strokeWeight(8);
+    strokeWeight(4);
     noFill();
     text(wave, width / 2, height / 2);
 
@@ -47,11 +47,12 @@ function newGame() {
 }
 
 /* Spawn a group of obstacles */
-function spawnObstacles() {
-    if (walls.length == 0) {
+function spawnObstacles(forceNextWave = false) {
+    if (walls.length == 0 || forceNextWave) {
         wave++;
+        let x = random(-1, 1) * (width / 2 - 25) + width / 2;
         for (let i = 0; i < 5; i++) {
-            let wall = new Wall(25, -50 * i, random() * i * 1.1, wave);
+            let wall = new Wall(x, -50 * i, random() * i * 1.1, wave);
             walls.push(wall);
         }
     }
@@ -66,9 +67,12 @@ async function gameOver() {
 }
 
 /* Listen for touch events */
-function touchStarted() {
-    if (!RUN_GAME) {
-        button.onTouch();
+async function mouseClicked() {
+    await new Promise(r => setTimeout(r, 1000));
+    if (RUN_GAME) {
+        spawnObstacles(true);
+        await new Promise(r => setTimeout(r, 5000));
     }
+    return false;
 }
 
