@@ -2,7 +2,7 @@ let ball;
 let walls = [];
 let popup;
 let RUN_GAME = false;
-let BG_COLOR = 255;
+let bgColors = ['brown','white','orange','cyan','teal','beige','green','blue','purple','yellow'];
 let wave = 0;
 
 function setup() {
@@ -11,13 +11,8 @@ function setup() {
 }
 
 async function draw() {
-    background(BG_COLOR);
-    textAlign(CENTER, CENTER);
-    textSize(128);
-    stroke(128);
-    strokeWeight(4);
-    noFill();
-    text(wave, width / 2, height / 2);
+    setBackground();
+    showWaveNumber();
 
     if (RUN_GAME) {
         for (wall of walls) {
@@ -46,13 +41,29 @@ function newGame() {
     RUN_GAME = true;
 }
 
+/* Change the background colour every wave */
+function setBackground() {
+    let index = wave % bgColors.length;
+    background(bgColors[index]);
+}
+
+/* Draw the wave number on the screen */
+function showWaveNumber() {
+    textAlign(CENTER, CENTER);
+    textSize(128);
+    stroke(0);
+    strokeWeight(4);
+    noFill();
+    text(wave, width / 2, height / 2);
+}
+
 /* Spawn a group of obstacles */
 function spawnObstacles(forceNextWave = false) {
     if (walls.length == 0 || forceNextWave) {
         wave++;
         let x = random(-1, 1) * (width / 2 - 25) + width / 2;
         for (let i = 0; i < 5; i++) {
-            let wall = new Wall(x, -50 * i, random() * i * 1.1, wave);
+            let wall = new Wall(x, -50 * i, random(-1,1) * i * 1.1, wave);
             walls.push(wall);
         }
     }
@@ -71,7 +82,6 @@ async function mouseClicked() {
     await new Promise(r => setTimeout(r, 1000));
     if (RUN_GAME) {
         spawnObstacles(true);
-        await new Promise(r => setTimeout(r, 5000));
     }
     return false;
 }
