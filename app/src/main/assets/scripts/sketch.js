@@ -2,7 +2,7 @@ let ball;
 let walls = [];
 let popup;
 let RUN_GAME = false;
-let score = 0;
+let BG_COLOR = 255;
 let wave = 0;
 
 function setup() {
@@ -11,8 +11,13 @@ function setup() {
 }
 
 async function draw() {
-//    translate(0, height*3/4 - ball.pos.y);
-    background(255);
+    background(BG_COLOR);
+    textAlign(CENTER, CENTER);
+    textSize(128);
+    stroke(128);
+    strokeWeight(8);
+    noFill();
+    text(wave, width / 2, height / 2);
 
     if (RUN_GAME) {
         for (wall of walls) {
@@ -38,9 +43,7 @@ async function draw() {
 /* Start a new game */
 function newGame() {
     ball = new Ball(width / 2, height * 3/4);
-//    generateLevel();
     RUN_GAME = true;
-    score = 0;
 }
 
 /* Spawn a group of obstacles */

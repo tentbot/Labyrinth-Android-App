@@ -57,7 +57,7 @@ class Ball {
     /* Accelerate the ball in the direction of tilt */
     gravity() {
         let gravity = new p5.Vector(rotationY, rotationX);
-        gravity = gravity.mult(0.007);
+        gravity = gravity.mult(0.01);
         gravity.setMag(gravity.mag() - 0.01);
         this.acc.add(gravity);
     }

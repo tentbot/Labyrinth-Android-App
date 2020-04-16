@@ -26,7 +26,7 @@ public class LabyrinthActivity extends AppCompatActivity {
         webSettings.setJavaScriptEnabled(true);
         webView.setWebViewClient(new MyWebViewClient());
 //        webView.setWebChromeClient(new WebChromeClient());
-        webView.loadUrl("file:///android_asset/labyrinth.html");
+        webView.loadUrl("file:///android_asset/main-menu.html");
     }
 
     private static class MyWebViewClient extends WebViewClient {
